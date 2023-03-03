@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>1</width>
+    <height>1</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="styleSheet">
+    <string notr="true">background: #222222;</string>
+   </property>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <layout class="QVBoxLayout" name="verticalLayout" stretch="1,0,0">
+      <property name="spacing">
+       <number>6</number>
+      </property>
+      <property name="sizeConstraint">
+       <enum>QLayout::SetFixedSize</enum>
+      </property>
+      <item>
+       <widget class="QStackedWidget" name="stackedWidget">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>1</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="page">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="9,1,0">
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <item>
+           <widget class="MyTextEdit" name="textEdit">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="cursor" stdset="0">
+             <cursorShape>IBeamCursor</cursorShape>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">QTextEdit {
+	background-color: #222222; 
+	color: #eeeeee;
+	font-family: &quot;Consolas&quot;;
+}</string>
+            </property>
+            <property name="lineWrapMode">
+             <enum>QTextEdit::NoWrap</enum>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QFrame" name="frame">
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Raised</enum>
+            </property>
+            <widget class="QTextEdit" name="minimap">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>74</width>
+               <height>287</height>
+              </rect>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="styleSheet">
+              <string notr="true">QTextEdit {
+	background-color: #222222; 
+	color: #eeeeee;
+	font-family: &quot;Consolas&quot;;
+	font: 1px;
+}</string>
+             </property>
+             <property name="lineWrapMode">
+              <enum>QTextEdit::NoWrap</enum>
+             </property>
+            </widget>
+            <widget class="QScrollBar" name="verticalScrollBar">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>17</width>
+               <height>287</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Fixed" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="orientation">
+              <enum>Qt::Vertical</enum>
+             </property>
+            </widget>
+           </widget>
+          </item>
+          <item>
+           <widget class="QScrollBar" name="verticalScrollBar_2">
+            <property name="styleSheet">
+             <string notr="true">QScrollBar {
+	left: -10px;
+}</string>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Vertical</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="page_2">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item>
+       <widget class="MyLine" name="line">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>3</height>
+         </size>
+        </property>
+        <property name="cursor">
+         <cursorShape>SizeVerCursor</cursorShape>
+        </property>
+        <property name="mouseTracking">
+         <bool>true</bool>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QFrame {
+	margin-top: 2px;
+	border: 0px;
+	background-color: #888888;
+}
+
+QFrame::hover {
+	margin-top: 0px;
+	border: 0px;
+	background-color: rgb(40, 120, 255);
+}</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <property name="lineWidth">
+         <number>0</number>
+        </property>
+        <property name="midLineWidth">
+         <number>1</number>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QTabWidget" name="tabWidget">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>1</width>
+          <height>1</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QTabWidget::pane { /* The tab widget frame */
+    border: 0px;
+    border-top: 1px solid #555555;
+    position: absolute;
+    top: -35px;
+	padding: 0px;
+	padding-top: 35px;
+
+	font-family: &quot;Consolas&quot;;
+	font: bold 12px;
+}
+
+QTabWidget::tab-bar {
+	top: 10px;
+	background: #222222;
+}
+
+QTabBar::tab {
+    background: #222222;
+    border: 0px;
+	border-bottom: 1px solid #222222;
+    min-width: 8ex;
+    padding: 1px;
+	margin: 10px;
+	font-family: &quot;Consolas&quot;;
+	font: 11px;
+}
+
+QTabBar::tab:selected, QTabBar::tab:hover {
+	color: #eeeeee;
+}
+
+QTabBar::tab:selected {
+    border-bottom-color: #eeeeee; /* same as pane color */
+}
+
+QTabBar::tab:!selected {
+	border-bottom-color: #222222;
+	color: #888888;
+}</string>
+        </property>
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="tab_terminal">
+         <attribute name="title">
+          <string>TERMINAL</string>
+         </attribute>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <layout class="QVBoxLayout" name="verticalLayout_2">
+            <item>
+             <widget class="MyPlainTextEdit" name="plainTextEdit">
+              <property name="styleSheet">
+               <string notr="true">QPlainTextEdit 
+{
+	border: 0px;
+	background-color: #222222; 
+	color: #eeeeee;
+	font-family: &quot;Consolas&quot;;
+}
+
+QPlainTextEdit::QScrollBar {border: 1px inset grey; background-color: white; padding: 10px;}</string>
+              </property>
+              <property name="undoRedoEnabled">
+               <bool>true</bool>
+              </property>
+              <property name="cursorWidth">
+               <number>5</number>
+              </property>
+              <property name="textInteractionFlags">
+               <set>Qt::TextEditorInteraction</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="tab_output">
+         <attribute name="title">
+          <string>OUTPUT</string>
+         </attribute>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(32, 140, 255);</string>
+   </property>
+  </widget>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>MyPlainTextEdit</class>
+   <extends>QPlainTextEdit</extends>
+   <header>myplaintextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MyTextEdit</class>
+   <extends>QTextEdit</extends>
+   <header>mytextedit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>MyLine</class>
+   <extends>QFrame</extends>
+   <header>myline.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>

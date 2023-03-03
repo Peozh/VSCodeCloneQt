@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/">
+        <file>qmlTest.qml</file>
+        <file>vscode_icon.ico</file>
+    </qresource>
+</RCC>

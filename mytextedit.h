@@ -12,7 +12,11 @@ class MyTextEdit : public QTextEdit
 public:
     explicit MyTextEdit(QWidget *parent = nullptr);
 
+//    virtual void scrollContentsBy(int dx, int dy) override;
+
     void connectMinimap(QTextEdit* p_minimap);
+
+    int lineHeight;
 
 private slots:
     void updateMinimap();

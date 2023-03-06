@@ -9,7 +9,7 @@
 #include <QLabel>
 
 #include <QVBoxLayout>
-#include <QFrame>>
+#include <QFrame>
 
 class MyTab : public QWidget
 {

@@ -23,6 +23,7 @@ MyMinimapWidget::MyMinimapWidget(QWidget *parent)
     this->p_textEdit->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     this->p_textEdit->setStyleSheet(styleSheet_textEdit);
     this->p_textEdit->setDisabled(true);
+    this->p_textEdit->setLineWrapMode(QTextEdit::LineWrapMode::NoWrap);
 
     this->styleSheet_scrollbar = R"(
         QScrollBar:vertical {
@@ -36,13 +37,13 @@ MyMinimapWidget::MyMinimapWidget(QWidget *parent)
         }
         QScrollBar::handle:vertical {
             background-color: rgba(255, 255, 255, 0%);
-            min-height: 20px;
+            min-height: 0px;
         }
         QScrollBar::handle:vertical:hover {
-            background-color: rgba(255, 255, 255, 20%);
+            background-color: rgba(255, 255, 255, 15%);
         }
         QScrollBar::handle:vertical:pressed {
-            background-color: rgba(255, 255, 255, 30%);
+            background-color: rgba(255, 255, 255, 20%);
         }
 
         /*reset arrows*/
@@ -79,31 +80,38 @@ MyMinimapWidget::MyMinimapWidget(QWidget *parent)
 void MyMinimapWidget::resizeEvent(QResizeEvent *event)
 {
     QWidget::resizeEvent(event);
-    this->p_scrollBar->resize(this->p_textEdit->width(), this->p_textEdit->height());
+    if (this->scrollbarHeight == 0) this->p_scrollBar->resize(this->p_textEdit->width(), this->p_textEdit->height());
+    else this->p_scrollBar->resize(this->p_textEdit->width(), this->scrollbarHeight);
 }
 
-//void MyMinimapWidget::enterEvent(QEnterEvent *event)
-//{
-//    if (event->type() == QEnterEvent::Enter)
-//    {
-//        QString temporary = R"(
-//            QScrollBar::handle:vertical {
-//                background-color: rgba(255, 255, 255, 10%);
-//        })";
-//        this->p_scrollBar->setStyleSheet(this->styleSheet_scrollbar + temporary);
-//    }
-//    QWidget::enterEvent(event);
-//}
+void MyMinimapWidget::setScrollBarHeight(int height)
+{
+    this->scrollbarHeight = height;
+    this->p_scrollBar->resize(this->p_textEdit->width(), this->scrollbarHeight);
+}
 
-//void MyMinimapWidget::leaveEvent(QEvent *event)
-//{
-//    if (event->type() == QEvent::Leave)
-//    {
-//        QString temporary = R"(
-//            QScrollBar::handle:vertical {
-//                background-color: rgba(255, 255, 255, 0%);
-//        })";
-//        this->p_scrollBar->setStyleSheet(this->styleSheet_scrollbar + temporary);
-//    }
-//    QWidget::leaveEvent(event);
-//}
+void MyMinimapWidget::enterEvent(QEnterEvent *event)
+{
+    if (event->type() == QEnterEvent::Enter)
+    {
+        QString temporary = R"(
+            QScrollBar::handle:vertical {
+                background-color: rgba(255, 255, 255, 10%);
+        })";
+        this->p_scrollBar->setStyleSheet(this->styleSheet_scrollbar + temporary);
+    }
+    QWidget::enterEvent(event);
+}
+
+void MyMinimapWidget::leaveEvent(QEvent *event)
+{
+    if (event->type() == QEvent::Leave)
+    {
+        QString temporary = R"(
+            QScrollBar::handle:vertical {
+                background-color: rgba(255, 255, 255, 0%);
+        })";
+        this->p_scrollBar->setStyleSheet(this->styleSheet_scrollbar + temporary);
+    }
+    QWidget::leaveEvent(event);
+}

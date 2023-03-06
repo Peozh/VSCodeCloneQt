@@ -3,11 +3,11 @@
 MyLine::MyLine(QWidget *parents) : QFrame(parents)
 {
     setMouseTracking(true);
-//    this->setContentsMargins(0, 0, 0, 0);
+    this->setContentsMargins(0, 0, 0, 0);
     this->setStyleSheet(R"(
         QFrame {
-            margin-top: 0px;
-            margin-bottom: 0px;
+            margin-top: 2px;
+            margin-bottom: 1px;
             border: 0px;
             background-color: #444444;
         }
@@ -16,14 +16,18 @@ MyLine::MyLine(QWidget *parents) : QFrame(parents)
             margin-top: 0px;
             margin-bottom: 0px;
             border: 0px;
-            background-color: rgb(41, 180, 255);
+            background-color: rgb(35, 130, 255);
         }
     )");
+    auto cursor = this->cursor();
+    cursor.setShape(Qt::CursorShape::SizeVerCursor);
+    this->setCursor(cursor);
 }
 
 void MyLine::mousePressEvent(QMouseEvent *event)
 {
-    if (targetDown == nullptr) return;
+    if (this->targetUp == nullptr) return;
+    if (this->targetDown == nullptr) return;
     if (event->button() == Qt::LeftButton) {
         dragStartPosition = event->globalPosition();
         dragStartGeometryUp = targetUp->geometry();
@@ -38,6 +42,8 @@ void MyLine::mousePressEvent(QMouseEvent *event)
 
 void MyLine::mouseMoveEvent(QMouseEvent* event)
 {
+    if (this->targetUp == nullptr) return;
+    if (this->targetDown == nullptr) return;
     if (this->layout == nullptr) return;
     // The user is moving the cursor.
     // See if the user is pressing down the left mouse button.
@@ -65,7 +71,7 @@ void MyLine::mouseMoveEvent(QMouseEvent* event)
 
 void MyLine::mouseReleaseEvent(QMouseEvent *event)
 {
-    this->setContentsMargins(0, 1, 0, 0);
+//    this->setContentsMargins(0, 0, 0, 0);
 }
 
 

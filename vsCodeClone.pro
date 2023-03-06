@@ -11,21 +11,25 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
+    myeditorpage.cpp \
     myline.cpp \
     mymenubar.cpp \
     myminimapwidget.cpp \
     myplaintextedit.cpp \
     mytabwidget.cpp \
-    mytextedit.cpp
+    mytextedit.cpp \
+    myuppertextpart.cpp
 
 HEADERS += \
     mainwindow.h \
+    myeditorpage.h \
     myline.h \
     mymenubar.h \
     myminimapwidget.h \
     myplaintextedit.h \
     mytabwidget.h \
-    mytextedit.h
+    mytextedit.h \
+    myuppertextpart.h
 
 FORMS += \
     mainwindow.ui

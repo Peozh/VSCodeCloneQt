@@ -77,12 +77,12 @@ MyMinimapWidget::MyMinimapWidget(QWidget *parent)
     this->p_scrollBar->resize(this->p_textEdit->width(), this->p_textEdit->height());
 }
 
-void MyMinimapWidget::resizeEvent(QResizeEvent *event)
-{
-    QWidget::resizeEvent(event);
-    if (this->scrollbarHeight == 0) this->p_scrollBar->resize(this->p_textEdit->width(), this->p_textEdit->height());
-    else this->p_scrollBar->resize(this->p_textEdit->width(), this->scrollbarHeight);
-}
+//void MyMinimapWidget::resizeEvent(QResizeEvent *event)
+//{
+//    QWidget::resizeEvent(event);
+//    if (this->scrollbarHeight == 0) this->p_scrollBar->resize(this->p_textEdit->width(), this->p_textEdit->height());
+//    else this->p_scrollBar->resize(this->p_textEdit->width(), this->scrollbarHeight);
+//}
 
 void MyMinimapWidget::setScrollBarHeight(int height)
 {

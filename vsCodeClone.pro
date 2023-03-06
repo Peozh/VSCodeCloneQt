@@ -18,6 +18,7 @@ SOURCES += \
     myplaintextedit.cpp \
     mytabwidget.cpp \
     mytextedit.cpp \
+    mytexteditwithspace.cpp \
     myuppertextpart.cpp
 
 HEADERS += \
@@ -29,6 +30,7 @@ HEADERS += \
     myplaintextedit.h \
     mytabwidget.h \
     mytextedit.h \
+    mytexteditwithspace.h \
     myuppertextpart.h
 
 FORMS += \

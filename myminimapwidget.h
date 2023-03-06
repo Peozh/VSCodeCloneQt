@@ -17,7 +17,7 @@ class MyMinimapWidget : public QWidget
 public:
     explicit MyMinimapWidget(QWidget *parent = nullptr);
 
-    virtual void resizeEvent(QResizeEvent *event) override;
+//    virtual void resizeEvent(QResizeEvent *event) override;
 
     void setScrollBarHeight(int height);
 

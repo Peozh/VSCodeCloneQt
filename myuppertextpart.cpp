@@ -21,11 +21,14 @@ MyUpperTextPart::MyUpperTextPart(QWidget *parent)
     // overlay
     // set line
     this->p_line = new MyLine(this);
-    this->p_line->setGeometry(0, this->geometry().bottom()-3, this->width(), 4);
+    this->p_line->setGeometry(0, this->p_stacked->geometry().bottom()-3, this->width(), 4);
+//    this->p_line->setGeometry(0, this->geometry().bottom()-3, this->width(), 4);
     this->p_line->connectResizeTargetUp(this->p_stacked);
+
+
 }
 
 void MyUpperTextPart::resizeEvent(QResizeEvent *event)
 {
-    this->p_line->setGeometry(0, this->geometry().bottom()-3, this->width(), 4);
+    this->p_line->setGeometry(0, this->p_stacked->geometry().bottom()-3, this->width(), 4);
 }

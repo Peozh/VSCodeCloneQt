@@ -16,6 +16,7 @@ SOURCES += \
     mymenubar.cpp \
     myminimapwidget.cpp \
     myplaintextedit.cpp \
+    myshadowgradient.cpp \
     mytabwidget.cpp \
     mytextedit.cpp \
     mytexteditwithspace.cpp \
@@ -28,6 +29,7 @@ HEADERS += \
     mymenubar.h \
     myminimapwidget.h \
     myplaintextedit.h \
+    myshadowgradient.h \
     mytabwidget.h \
     mytextedit.h \
     mytexteditwithspace.h \

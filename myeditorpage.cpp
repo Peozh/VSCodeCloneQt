@@ -97,11 +97,26 @@ MyEditorPage::MyEditorPage(QWidget *parent)
     p_layout->setSpacing(0);
     this->setLayout(this->p_layout);
 
+    this->p_shadow = new MyShadowGradient(this);
+    p_shadow->setContentsMargins(0, 0, 0, 0);
+    int right = this->p_textEdit->geometry().right()+1;
+    int top = this->p_textEdit->geometry().top();
+    int bottom = this->p_textEdit->geometry().bottom();
+    int width = 7;
+    int height = bottom - top;
+    int x = right - width;
+    int y = top;
+    qDebug() << "x:" << x << " y:" << y << " width:" << width << " height:" << height;
+    p_shadow->setGeometry(x, y, width, height);
+    this->p_shadow->raise();
+    this->updateShadowVisibility();
+
     // log & line count update
 //    connect(this->p_textEdit, &QTextEdit::textChanged, this, &MyEditorPage::printLog);
     connect(this->p_textEdit, SIGNAL(textChanged()), this, SLOT(updateLineCount()));
     // scroll value changed
     connect(this->p_textEdit->verticalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(moveScrollBars(int)));
+    connect(this->p_textEdit->horizontalScrollBar(), SIGNAL(valueChanged(int)), this, SLOT(updateShadowVisibility()));
     // line count changed
     connect(this, SIGNAL(lineCountChanged()), this, SLOT(applyLineCountToScrollBars()));
     // sync vertical scrollbars with textEdit
@@ -114,9 +129,15 @@ void MyEditorPage::resizeEvent(QResizeEvent *event)
 {
     qDebug() << "resize event";
     QWidget::resizeEvent(event);
+
+    this->p_textEdit->ensureCursorVisible();
+
     // resize occurred
     this->applyVisibleHeightToScrollBars();
 
+    // shadow gradient
+    this->resizeShadow();
+    this->updateShadowVisibility();
 
     // document margines
     int lineHeight = this->p_textEdit->lineHeight;
@@ -143,7 +164,9 @@ void MyEditorPage::resizeEvent(QResizeEvent *event)
     float ratio = 0.0;
     if (maximum != 0) ratio = (float)value/maximum;
     this->p_minimap->p_textEdit->verticalScrollBar()->setValue(round(ratio*hiddenMaximum));
+
 }
+
 
 int MyEditorPage::getLineCount() const
 {
@@ -297,4 +320,23 @@ void MyEditorPage::applyVisibleHeightToScrollBars()
 void MyEditorPage::scrollMinimap()
 {
 
+}
+
+void MyEditorPage::updateShadowVisibility()
+{
+    bool shadowVisible = this->p_textEdit->horizontalScrollBar()->isVisible() && (this->p_textEdit->horizontalScrollBar()->value() != this->p_textEdit->horizontalScrollBar()->maximum());
+    this->p_shadow->setVisible(shadowVisible);
+}
+
+void MyEditorPage::resizeShadow()
+{
+    int right = this->p_textEdit->geometry().right()+1;
+    int top = this->p_textEdit->geometry().top();
+    int bottom = this->p_textEdit->geometry().bottom();
+    int width = 7;
+    int height = bottom - top;
+    int x = right - width;
+    int y = top;
+    qDebug() << "x:" << x << " y:" << y << " width:" << width << " height:" << height;
+    p_shadow->setGeometry(x, y, width, height);
 }

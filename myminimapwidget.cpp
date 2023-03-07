@@ -70,11 +70,11 @@ MyMinimapWidget::MyMinimapWidget(QWidget *parent)
     auto p_layout = new QHBoxLayout(this);
     p_layout->setContentsMargins(0, 0, 0, 0);
     p_layout->addWidget(this->p_textEdit);
-    this->setContentsMargins(0, 0, 0, 0);
+    this->setContentsMargins(5, 0, 0, 0);
     this->setLayout(p_layout);
 
     this->p_scrollBar->move(0, 0);
-    this->p_scrollBar->resize(this->p_textEdit->width(), this->p_textEdit->height());
+    this->p_scrollBar->resize(this->width(), this->p_textEdit->height());
 }
 
 //void MyMinimapWidget::resizeEvent(QResizeEvent *event)
@@ -87,7 +87,7 @@ MyMinimapWidget::MyMinimapWidget(QWidget *parent)
 void MyMinimapWidget::setScrollBarHeight(int height)
 {
     this->scrollbarHeight = height;
-    this->p_scrollBar->resize(this->p_textEdit->width(), this->scrollbarHeight);
+    this->p_scrollBar->resize(this->width(), this->scrollbarHeight);
 }
 
 void MyMinimapWidget::enterEvent(QEnterEvent *event)

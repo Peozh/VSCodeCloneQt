@@ -6,6 +6,7 @@
 
 #include "mytextedit.h"
 #include "myminimapwidget.h"
+#include "myshadowgradient.h"
 
 class MyEditorPage : public QWidget
 {
@@ -17,6 +18,7 @@ class MyEditorPage : public QWidget
     MyTextEdit* p_textEdit;
     MyMinimapWidget* p_minimap;
     QScrollBar* p_scroll_vertical;
+    MyShadowGradient* p_shadow;
 
 public:
     explicit MyEditorPage(QWidget *parent = nullptr);
@@ -36,6 +38,9 @@ public slots:
     void applyLineCountToScrollBars();
     void applyVisibleHeightToScrollBars();
     void scrollMinimap();
+
+    void updateShadowVisibility();
+    void resizeShadow();
 
 };
 

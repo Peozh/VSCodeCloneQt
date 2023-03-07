@@ -23,7 +23,7 @@ MyTextEdit::MyTextEdit(QWidget *parent) : QTextEdit(parent)
         })"
     );
     auto blockFmt = QTextBlockFormat();
-    blockFmt.setLineHeight(80, QTextBlockFormat::ProportionalHeight);
+    blockFmt.setLineHeight(100, QTextBlockFormat::ProportionalHeight);
     auto cursor_text = this->textCursor(); cursor_text.mergeBlockFormat(blockFmt); this->setTextCursor(cursor_text);
     QFontMetricsF metric(this->font());
     this->lineHeight = qCeil(qMax(metric.lineSpacing(), metric.boundingRect("a").height()));

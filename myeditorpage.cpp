@@ -97,9 +97,6 @@ MyEditorPage::MyEditorPage(QWidget *parent)
     p_layout->setSpacing(0);
     this->setLayout(this->p_layout);
 
-
-
-
     // log & line count update
 //    connect(this->p_textEdit, &QTextEdit::textChanged, this, &MyEditorPage::printLog);
     connect(this->p_textEdit, SIGNAL(textChanged()), this, SLOT(updateLineCount()));
@@ -126,7 +123,16 @@ void MyEditorPage::resizeEvent(QResizeEvent *event)
     QFontMetricsF metric(this->p_minimap->p_textEdit->font());
     float minimapLineHeight = ceil(metric.lineSpacing());
     auto frameFormat = this->p_minimap->p_textEdit->document()->rootFrame()->frameFormat();
-    frameFormat.setBottomMargin((float)(this->height() - this->p_textEdit->lineHeight - 4)*minimapLineHeight/lineHeight);
+    double bottomMargin = this->p_textEdit->height();
+    if (this->p_textEdit->horizontalScrollBar()->isVisible()) bottomMargin -= this->p_textEdit->horizontalScrollBar()->height();
+    bottomMargin -= this->p_textEdit->lineHeight + 4;
+    frameFormat.setBottomMargin(bottomMargin*minimapLineHeight/lineHeight);
+    qDebug() << "height : " << this->p_textEdit->horizontalScrollBar()->height();
+    qDebug() << "maximumHeight : " << this->p_textEdit->horizontalScrollBar()->maximumHeight();
+    qDebug() << "minimumHeight : " << this->p_textEdit->horizontalScrollBar()->minimumHeight();
+    qDebug() << "width : " << this->p_textEdit->horizontalScrollBar()->width();
+    qDebug() << "maximumWidth : " << this->p_textEdit->horizontalScrollBar()->maximumWidth();
+    qDebug() << "minimumWidth : " << this->p_textEdit->horizontalScrollBar()->minimumWidth();
     this->p_minimap->p_textEdit->document()->rootFrame()->setFrameFormat(frameFormat);
 
     // scroll hidden
@@ -168,6 +174,27 @@ void MyEditorPage::updateLineCount()
     int newLineCount = this->p_textEdit->document()->lineCount();
     qDebug() << "updateLineCount() : " << lineCount << " -> " << newLineCount;
     this->setLineCount(newLineCount);
+
+
+    // document margines
+    auto frameFormat = this->p_textEdit->document()->rootFrame()->frameFormat();
+    double bottomMargin = this->p_textEdit->height();
+    qDebug() << "document height : " << this->p_textEdit->document()->size().height();
+    qDebug() << "margin : " << this->p_textEdit->document()->documentMargin();
+    qDebug() << "bottomMargin : " << bottomMargin;
+    qDebug() << "topMargin : " << frameFormat.topMargin();
+    if (this->p_textEdit->horizontalScrollBar()->isVisible()) bottomMargin -= this->p_textEdit->horizontalScrollBar()->height();
+    bottomMargin -= this->p_textEdit->lineHeight + 4;
+    if (frameFormat.bottomMargin() == bottomMargin) return;
+    frameFormat.setBottomMargin(bottomMargin);
+    frameFormat.setRightMargin(30);
+    this->p_textEdit->document()->rootFrame()->setFrameFormat(frameFormat);
+
+    qDebug() << "document height : " << this->p_textEdit->document()->size().height();
+    qDebug() << "margin : " << this->p_textEdit->document()->documentMargin();
+    qDebug() << "bottomMargin : " << bottomMargin;
+    qDebug() << "topMargin : " << frameFormat.topMargin();
+//    qDebug() << "lineHeight : " << this->p_textEdit->document()->size().height();
 }
 
 /*
@@ -186,7 +213,6 @@ void MyEditorPage::moveScrollBars(int value)
     auto maximum = this->p_textEdit->verticalScrollBar()->maximum();
     float ratio = (float)value/maximum;
     this->p_minimap->p_textEdit->verticalScrollBar()->setValue(round(ratio*hiddenMaximum));
-
 }
 
 /*
@@ -208,7 +234,10 @@ void MyEditorPage::applyLineCountToScrollBars()
     // height of minimap scrollbar
     int minimapHeight = this->p_minimap->height();
     int minimapScrollBarHeight = minimapDocumentHeight;
-    float minimapBottomMargin = (float)(this->height() - this->p_textEdit->lineHeight - 4)*minimapLineHeight/lineHeight;
+    double bottomMargin = this->p_textEdit->height();
+    if (this->p_textEdit->horizontalScrollBar()->isVisible()) bottomMargin -= this->p_textEdit->horizontalScrollBar()->height();
+    bottomMargin -= this->p_textEdit->lineHeight + 4;
+    float minimapBottomMargin = bottomMargin*minimapLineHeight/lineHeight;
     this->p_textEdit->setMinimapBottomMargin(minimapBottomMargin);
     minimapScrollBarHeight = std::min(minimapScrollBarHeight, minimapHeight);
     this->p_minimap->setScrollBarHeight(minimapScrollBarHeight);
@@ -232,18 +261,17 @@ void MyEditorPage::applyVisibleHeightToScrollBars()
 
     // document margines
     auto frameFormat = this->p_textEdit->document()->rootFrame()->frameFormat();
-    frameFormat.setBottomMargin(this->height() - this->p_textEdit->lineHeight - 4);
+    double bottomMargin = this->p_textEdit->height();
+    if (this->p_textEdit->horizontalScrollBar()->isVisible()) bottomMargin -= this->p_textEdit->horizontalScrollBar()->height();
+    bottomMargin -= this->p_textEdit->lineHeight + 4;
+    frameFormat.setBottomMargin(bottomMargin);
     frameFormat.setRightMargin(30);
     this->p_textEdit->document()->rootFrame()->setFrameFormat(frameFormat);
 
     // height of minimap scrollbar
     int documentHeight = this->p_textEdit->document()->size().height();
     int minimapDocumentHeight = this->p_minimap->p_textEdit->document()->size().height();
-//    qDebug() << "old minimapDocumentHeight : " << minimapDocumentHeight;
-//    minimapDocumentHeight = (float)documentHeight/lineHeight*minimapLineHeight;
-//    qDebug() << "new minimapDocumentHeight : " << minimapDocumentHeight;
-//    this->p_minimap->p_textEdit->verticalScrollBar()->setMaximum(minimapDocumentHeight);
-    float minimapBottomMargin = (float)(this->height() - this->p_textEdit->lineHeight - 4)*minimapLineHeight/lineHeight;
+    float minimapBottomMargin = bottomMargin*minimapLineHeight/lineHeight;
     int minimapHeight = this->p_minimap->height();
     int minimapScrollBarHeight = this->lineCount*minimapLineHeight + minimapBottomMargin;
     minimapScrollBarHeight = qMin(minimapScrollBarHeight, minimapHeight);
@@ -252,7 +280,6 @@ void MyEditorPage::applyVisibleHeightToScrollBars()
 
     // set page step
     int minimapVisibleHeight = qMax(this->p_minimap->p_textEdit->size().height(), 0);
-//    float minimapBottomMargin = (float)(this->height() - this->p_textEdit->lineHeight - 4)*minimapLineHeight/lineHeight;
     this->p_textEdit->setMinimapBottomMargin(minimapBottomMargin);
     int pageStep = this->p_textEdit->verticalScrollBar()->pageStep();
     qDebug() << "page step : " << pageStep;

@@ -17,11 +17,12 @@ MyUpperTextPart::MyUpperTextPart(QWidget *parent)
     this->p_layout->setContentsMargins(0, 0, 0, 1);
     this->p_layout->setSpacing(0);
     this->setLayout(this->p_layout);
+    this->setContentsMargins(0, 0, 0, 0);
 
     // overlay
     // set line
     this->p_line = new MyLine(this);
-    this->p_line->setGeometry(0, this->p_stacked->geometry().bottom()-3, this->width(), 4);
+    this->p_line->setGeometry(0, this->height(), this->width(), 4);
 //    this->p_line->setGeometry(0, this->geometry().bottom()-3, this->width(), 4);
     this->p_line->connectResizeTargetUp(this->p_stacked);
 
@@ -30,5 +31,5 @@ MyUpperTextPart::MyUpperTextPart(QWidget *parent)
 
 void MyUpperTextPart::resizeEvent(QResizeEvent *event)
 {
-    this->p_line->setGeometry(0, this->p_stacked->geometry().bottom()-3, this->width(), 4);
+    this->p_line->setGeometry(0, this->p_stacked->geometry().bottom()-2, this->width(), 4);
 }

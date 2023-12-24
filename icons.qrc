@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/">
+        <file>icons/close-white-128.png</file>
+        <file>icons/maximize-white-128.png</file>
+        <file>icons/minimize-white-128.png</file>
+        <file>icons/restore-white-128.png</file>
+        <file>icons/vscode_icon.ico</file>
+        <file>icons/more-19-1024-white.png</file>
+        <file>icons/more-19-1024-white-30%.png</file>
+        <file>icons/right-arrow-9-white.svg</file>
+        <file>icons/files2-gray-512.png</file>
+        <file>icons/files2-white-512.png</file>
+    </qresource>
+</RCC>
